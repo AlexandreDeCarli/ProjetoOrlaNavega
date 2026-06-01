@@ -1154,71 +1154,98 @@ a:hover {
   }
 
   .actions-table tr {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 0.5rem 0.75rem;
+    padding: 1.15rem;
+    margin-bottom: 0.85rem;
     background-color: var(--bg-surface-opaque);
     border: 1px solid var(--border-light);
     border-radius: 16px;
-    padding: 1.25rem;
-    margin-bottom: 1rem;
     box-shadow: var(--shadow-sm);
     transition: var(--transition-smooth);
     position: relative;
+    cursor: pointer;
   }
 
   .actions-table tr:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+    border-color: rgba(0, 160, 220, 0.15);
   }
 
   .actions-table td {
     border-bottom: none;
-    padding: 0.4rem 0;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     font-size: 0.85rem;
-    gap: 1rem;
   }
 
-  /* Customização de Células Específicas nos Cards */
+  /* Posicionamento Inteligente em Grid das Informações do Card */
+  
+  /* ID da Ação */
   .actions-table td.col-num {
+    grid-column: 1;
+    grid-row: 1;
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--text-muted);
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-    display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
-  .actions-table td.col-num::before {
-    content: 'Ação Identificada';
-    font-weight: 600;
-    color: var(--text-muted);
+  /* Categoria / Linha de Ação */
+  .actions-table td[data-label="Categoria"] {
+    grid-column: 2 / span 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    font-size: 0.75rem;
   }
 
+  /* Ação Principal (Destaque Central) */
   .actions-table td.col-action {
+    grid-column: 1 / span 3;
+    grid-row: 2;
     font-size: 0.95rem;
     font-weight: 600;
     color: var(--text-primary);
-    line-height: 1.4;
-    display: block; /* Ocupa a largura total da linha */
+    line-height: 1.45;
+    padding: 0.35rem 0 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 40, 80, 0.05); /* Divisor sutil entre conteúdo e tags */
+    margin-bottom: 0.25rem;
+    display: block; /* Ocupa largura total */
     text-align: left;
-    max-width: 100%;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 0.75rem;
-    margin-bottom: 0.5rem;
   }
 
-  /* Exibe o rótulo da coluna de forma elegante no Mobile */
-  .actions-table td:not(.col-num):not(.col-action)::before {
-    content: attr(data-label);
-    font-family: var(--font-display);
+  /* Responsável (Secretaria) no rodapé do Card */
+  .actions-table td.col-responsavel {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: 0.8rem;
     font-weight: 600;
     color: var(--text-secondary);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    justify-content: flex-start;
+    line-height: 1.3;
+  }
+
+  /* UP Badge no rodapé */
+  .actions-table td[data-label="UP"] {
+    grid-column: 2;
+    grid-row: 3;
+    justify-content: center;
+  }
+
+  /* Status Badge no rodapé */
+  .actions-table td[data-label="Status"] {
+    grid-column: 3;
+    grid-row: 3;
+    justify-content: flex-end;
+  }
+
+  /* Oculta os rótulos data-label de texto redundantes */
+  .actions-table td::before {
+    display: none !important;
   }
 
   /* Ajustes no detalhamento Slide-Over */
