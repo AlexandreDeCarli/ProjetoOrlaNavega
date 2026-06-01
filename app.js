@@ -664,6 +664,17 @@ const init = async () => {
   `;
 
   initDynamicFilters();
+
+  // No mobile, colapsa os filtros mais longos por padrão para evitar scroll excessivo
+  if (window.innerWidth < 992) {
+    const topicDetails = document.getElementById('group-topic');
+    const respDetails = document.getElementById('group-responsavel');
+    const statusDetails = document.getElementById('group-status');
+    if (topicDetails) topicDetails.removeAttribute('open');
+    if (respDetails) respDetails.removeAttribute('open');
+    if (statusDetails) statusDetails.removeAttribute('open');
+  }
+
   bindEvents();
   filterAndSortData();
 };

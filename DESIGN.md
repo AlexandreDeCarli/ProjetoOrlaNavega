@@ -53,3 +53,9 @@ All color values are defined using the modern `oklch` color space to ensure beau
 ### 3. Detail Slide-Over Panel
 - Smoothly slides out from the right (`transform: translateX(0)`) using a premium easing transition (`cubic-bezier(0.16, 1, 0.3, 1)`).
 - Mobile viewport (< 768px) expands the slide-over to full width (`100vw`) for comfortable reading.
+
+### 4. Collapsible Filter Groups (Accordions)
+- Filter groups in the sidebar use semantic `<details>` and `<summary>` structures, removing default browser markers for a custom vector chevron indicator.
+- Accordions animate dynamically upon expansion via a smooth slide-down and fade-in keyframe transition (`slideDown`).
+- To prevent excessive scrolling inside the mobile drawer, the longest lists ("Linhas de Ação", "Secretaria / Responsável", and "Status") are programmatically collapsed during application initialization on viewports narrower than `992px`.
+

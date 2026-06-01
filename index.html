@@ -52,8 +52,8 @@
       </div>
 
       <!-- Filtro: Unidades de Planejamento (UP) -->
-      <div class="filter-group">
-        <span class="filter-title">Unidade de Planejamento</span>
+      <details class="filter-group filter-group-details" id="group-up" open>
+        <summary class="filter-group-summary">Unidade de Planejamento</summary>
         <div class="filter-options" id="filter-up-options">
           <button class="filter-btn active" data-filter="up" data-value="all">
             <span>Todas as UPs</span>
@@ -72,11 +72,11 @@
             <span class="filter-count" id="count-up-up3">0</span>
           </button>
         </div>
-      </div>
+      </details>
 
       <!-- Filtro: Linhas de Ação -->
-      <div class="filter-group">
-        <span class="filter-title">Linhas de Ação</span>
+      <details class="filter-group filter-group-details" id="group-topic" open>
+        <summary class="filter-group-summary">Linhas de Ação</summary>
         <div class="filter-options" id="filter-topic-options">
           <button class="filter-btn active" data-filter="topic" data-value="all">
             <span>Todas as Categorias</span>
@@ -84,11 +84,11 @@
           </button>
           <!-- Inserido dinamicamente via JS -->
         </div>
-      </div>
+      </details>
 
       <!-- Filtro: Órgão Responsável -->
-      <div class="filter-group">
-        <span class="filter-title">Secretaria / Responsável</span>
+      <details class="filter-group filter-group-details" id="group-responsavel" open>
+        <summary class="filter-group-summary">Secretaria / Responsável</summary>
         <div class="filter-options" id="filter-responsavel-options">
           <button class="filter-btn active" data-filter="responsavel" data-value="all">
             <span>Todos os Órgãos</span>
@@ -96,11 +96,11 @@
           </button>
           <!-- Inserido dinamicamente via JS -->
         </div>
-      </div>
+      </details>
 
       <!-- Filtro: Status -->
-      <div class="filter-group">
-        <span class="filter-title">Status</span>
+      <details class="filter-group filter-group-details" id="group-status" open>
+        <summary class="filter-group-summary">Status</summary>
         <div class="filter-options" id="filter-status-options">
           <button class="filter-btn active" data-filter="status" data-value="all">
             <span>Todos os Status</span>
@@ -108,7 +108,7 @@
           </button>
           <!-- Inserido dinamicamente via JS -->
         </div>
-      </div>
+      </details>
 
     </aside>
 
