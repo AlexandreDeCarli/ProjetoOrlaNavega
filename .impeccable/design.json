@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-01T18:31:30Z",
+  "title": "Design System: Painel Costeiro Premium",
+  "extensions": {
+    "colorMeta": {
+      "primary": { "role": "primary", "displayName": "Accent Costal (Sea Blue)", "canonical": "oklch(0.55 0.16 220)", "tonalRamp": ["oklch(0.15 0.05 220)", "oklch(0.3 0.09 220)", "oklch(0.45 0.13 220)", "oklch(0.55 0.16 220)", "oklch(0.65 0.14 220)", "oklch(0.75 0.1 220)", "oklch(0.85 0.06 220)", "oklch(0.94 0.02 220)"] },
+      "secondary": { "role": "secondary", "displayName": "Accent Eco (Restinga Green)", "canonical": "oklch(0.60 0.14 165)", "tonalRamp": ["oklch(0.15 0.04 165)", "oklch(0.3 0.08 165)", "oklch(0.45 0.11 165)", "oklch(0.6 0.14 165)", "oklch(0.7 0.12 165)", "oklch(0.8 0.09 165)", "oklch(0.9 0.05 165)", "oklch(0.95 0.02 165)"] },
+      "tertiary": { "role": "tertiary", "displayName": "Accent Sun (Sand Gold)", "canonical": "oklch(0.72 0.12 70)", "tonalRamp": ["oklch(0.15 0.03 70)", "oklch(0.3 0.06 70)", "oklch(0.45 0.09 70)", "oklch(0.6 0.11 70)", "oklch(0.72 0.12 70)", "oklch(0.82 0.09 70)", "oklch(0.9 0.06 70)", "oklch(0.96 0.02 70)"] },
+      "neutral-bg": { "role": "neutral", "displayName": "Coastal Off-White", "canonical": "oklch(0.985 0.004 220)", "tonalRamp": ["oklch(0.1 0.01 220)", "oklch(0.25 0.01 220)", "oklch(0.4 0.01 220)", "oklch(0.6 0.008 220)", "oklch(0.75 0.006 220)", "oklch(0.85 0.005 220)", "oklch(0.93 0.004 220)", "oklch(0.985 0.004 220)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Outfit Display", "purpose": "Brand headings, card large numbers, and section highlights." },
+      "body": { "displayName": "Plus Jakarta Sans Body", "purpose": "Highly readable typography for action descriptions, dense text tables, and secondary labels." }
+    },
+    "shadows": [
+      { "name": "shadow-sm", "value": "0 4px 12px rgba(0, 30, 60, 0.03)", "purpose": "Ambient hover glow under layout card elements." },
+      { "name": "shadow-lg", "value": "0 16px 48px rgba(0, 30, 60, 0.08)", "purpose": "Structural overlay shadow under mobile filter drawer and detail slide-over." }
+    ],
+    "motion": [
+      { "name": "transition-smooth", "value": "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Standard premium transition for state and layout reveals." },
+      { "name": "slide-over-slide", "value": "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Action details slide-over animation." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "768px" },
+      { "name": "desktop", "value": "992px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botão primário para interações e chamadas de ação.",
+      "html": "<button class=\"ds-btn-primary\">SALVAR ALTERAÇÕES</button>",
+      "css": ".ds-btn-primary { background-color: #2c8ebb; color: #ffffff; padding: 10px 20px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background-color: #1f6f96; transform: translateY(-1px); }"
+    },
+    {
+      "name": "Glossary Term Link",
+      "kind": "custom",
+      "refersTo": "glossary-term",
+      "description": "Sigla ou termo administrativo com dica explicativa acessível.",
+      "html": "<abbr class=\"ds-glossary-term\" tabindex=\"0\" data-tooltip=\"PGI (Plano de Gestão Integrada): Instrumento de planejamento estratégico costeiro.\">PGI</abbr>",
+      "css": ".ds-glossary-term { text-decoration: underline dotted #2c8ebb; text-underline-offset: 4px; cursor: help; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; color: #0d1e28; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-glossary-term:hover { color: #2c8ebb; text-decoration-color: #2eb37f; }"
+    },
+    {
+      "name": "Global Hover Tooltip",
+      "kind": "custom",
+      "description": "Contêiner de dica flutuante que acompanha o cursor ou foco.",
+      "html": "<div class=\"ds-global-tooltip ds-visible\">PGI (Plano de Gestão Integrada): Planejamento estratégico municipal para o uso sustentável da orla costeira.</div>",
+      "css": ".ds-global-tooltip { background-color: #0d1e28; color: #ffffff; padding: 12px 16px; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.75rem; font-weight: 400; line-height: 1.4; width: 280px; box-shadow: 0 16px 48px rgba(0, 30, 60, 0.08); border: 1px solid rgba(255, 255, 255, 0.1); } .ds-global-tooltip.ds-visible { opacity: 1; transform: translateY(0); }"
+    },
+    {
+      "name": "Active Filter Button",
+      "kind": "chip",
+      "description": "Botão de filtro selecionado de forma ativa na barra lateral.",
+      "html": "<button class=\"ds-filter-btn ds-active\"><span>Todas as UPs</span><span class=\"ds-filter-count\">87</span></button>",
+      "css": ".ds-filter-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0.65rem 0.85rem; background-color: #ebf4f8; color: #2c8ebb; border: 1px solid transparent; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); } .ds-filter-count { font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.4rem; background-color: #ffffff; border-radius: 6px; box-shadow: 0 4px 12px rgba(0, 30, 60, 0.03); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Maritime Ledger",
+    "overview": "\"The Maritime Ledger\" é um sistema de design concebido sob uma ótica de extrema precisão, sobriedade e transparência pública. Ele serve como o registro oficial e confiável das 87 ações de gestão integrada da orla de Navegantes, aproximando a municipalidade do cidadão. Ele rejeita veementemente as tendências corporativas genéricas de SaaS (como tons saturados artificiais, excesso de caixas soltas em grids e sombras pretas duras tridimensionais), abraçando em vez disso uma linguagem visual purificada, costeira e plana.",
+    "keyCharacteristics": [
+      "Coastal Off-White Canvas: Uso de fundos marinhos purificados e dessaturados para descanso visual.",
+      "Immediate Structural Density: Apresentação de dados de alta densidade no formato tabular original, evitando blocos inflados.",
+      "Refined Interactivity: Transições calmas baseadas em estados de micro-movimento para reações ao cursor e toques."
+    ],
+    "rules": [
+      { "name": "The Rarity Rule", "body": "O azul primário e o verde ecológico aparecem apenas em componentes de destaque e ação. A sua parcimônia é o que orienta a atenção do usuário para o que de fato importa.", "section": "colors" },
+      { "name": "The Tonal Flat Rule", "body": "Superfícies permanecem estritamente planas em seu estado de repouso. Sombras discretas surgem apenas em resposta a interações de hover ou em estados flutuantes (overlays).", "section": "elevation" }
+    ],
+    "dos": [
+      "Do manter a tabela nativa responsiva horizontal em celulares para visualização densa de dados.",
+      "Do manter todos os grupos de filtros laterais colapsados por padrão para economizar espaço vertical.",
+      "Do garantir contraste tipográfico mínimo de 4.5:1 em todos os rótulos secundários e badges de status.",
+      "Do utilizar exclusivamente os pesos e fontes oficiais Outfit e Plus Jakarta Sans."
+    ],
+    "donts": [
+      "Don't utilizar bordas decorativas grossas unilaterais coloridas (side-stripe borders) maior que 1px em cards ou alertas.",
+      "Don't aplicar gradientes multicoloridos de fundo ou em recortes de texto (gradient text).",
+      "Don't forçar a listagem mobile a se empilhar em cards isolados de rolagem vertical infinita.",
+      "Don't utilizar sombras escuras saturadas tridimensionais (shadows com opacidade maior que 8% em tom preto puro)."
+    ]
+  }
+}

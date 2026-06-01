@@ -1,61 +1,170 @@
+---
+name: Painel Costeiro Premium
+description: Sistema de design altamente interativo e refinado para o monitoramento costeiro do PGI Orla de Navegantes - SC.
+colors:
+  primary: "#2c8ebb" # Accent Costal (Sea Blue)
+  primary-light: "#ebf4f8" # Accent Costal Light
+  secondary: "#2eb37f" # Accent Eco (Restinga Green)
+  secondary-light: "#edf8f4" # Accent Eco Light
+  tertiary: "#d1a843" # Accent Sun (Sand Gold)
+  tertiary-light: "#fbf6e7" # Accent Sun Light
+  neutral-bg: "#f7fafb" # Fundo Principal (Coastal Off-White)
+  neutral-surface: "#ffffff" # Superfície Opaca
+  text-primary: "#0d1e28" # Primary Navy Text
+  text-secondary: "#4b5e6b" # Secondary Slate Text
+  text-muted: "#6e808e" # Muted Text
+typography:
+  display:
+    fontFamily: "Outfit, sans-serif"
+    fontWeight: 700
+    fontSize: "2.5rem"
+    lineHeight: 1.15
+    letterSpacing: "-0.02em"
+  body:
+    fontFamily: "Plus Jakarta Sans, sans-serif"
+    fontWeight: 400
+    fontSize: "1rem"
+    lineHeight: 1.6
+    letterSpacing: "normal"
+rounded:
+  sm: "4px"
+  md: "8px"
+  lg: "12px"
+spacing:
+  xs: "4px"
+  sm: "8px"
+  md: "16px"
+  lg: "24px"
+  xl: "32px"
+components:
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.neutral-surface}"
+    rounded: "{rounded.md}"
+    padding: "0.75rem 1.25rem"
+  button-primary-hover:
+    backgroundColor: "#1f6f96"
+  card-explorer:
+    backgroundColor: "{colors.neutral-surface}"
+    rounded: "{rounded.lg}"
+    padding: "1.5rem"
+---
+
 # Design System: Painel Costeiro Premium
 
 Visual identity guidelines and components for the Plano de Gestão Integrada da Orla (PGI Orla) de Navegantes - SC.
 
-## Colors
+## 1. Overview
 
-All color values are defined using the modern `oklch` color space to ensure beautiful gradients, high-contrast, and accessibility.
+**Creative North Star: "The Maritime Ledger"**
 
-### Theme Colors
-- **Fundo Principal (Primary Bg)**: `oklch(0.985 0.004 220)` — Ultra-soft coastal off-white with a very light teal/blue hue to prevent visual strain.
-- **Superfícies (Surface/Glass)**: `rgba(255, 255, 255, 0.75)` — Soft glassmorphism background with a blur filter.
-- **Superfície Opaca**: `oklch(1 0 0)` — Pure white surface.
+"The Maritime Ledger" é um sistema de design concebido sob uma ótica de extrema precisão, sobriedade e transparência pública. Ele serve como o registro oficial e confiável das 87 ações de gestão integrada da orla de Navegantes, aproximando a municipalidade do cidadão. Ele rejeita veementemente as tendências corporativas genéricas de SaaS (como tons saturados artificiais, excesso de caixas soltas em grids e sombras pretas duras tridimensionais), abraçando em vez disso uma linguagem visual purificada, costeira e plana.
 
-### Typography Ink Ramps
-- **Ink Primário (Primary Text)**: `oklch(0.18 0.02 240)` — Ocean deep navy, ensuring contrast ratios > 7:1 against backgrounds.
-- **Ink Secundário (Labels)**: `oklch(0.42 0.02 240)` — Soft slate blue.
-- **Ink Muted (Subtle Metadados)**: `oklch(0.55 0.015 240)` — Light blue-gray.
-
-### Accent Coastal Colors
-- **Acento Eco (Restinga)**: `oklch(0.60 0.14 165)` — Nature green representing local flora.
-  - Light variation: `oklch(0.95 0.02 165)`
-- **Acento Costal (Sea)**: `oklch(0.55 0.16 220)` — Vibrant maritime blue.
-  - Light variation: `oklch(0.94 0.02 220)`
-- **Acento Sol (Sand)**: `oklch(0.72 0.12 70)` — Warm sandy gold.
-  - Light variation: `oklch(0.96 0.02 70)`
-
-### Status Badges
-- **Previsto / Planejado**: `oklch(0.68 0.10 50)` (Warm orange-sand) | Bg: `oklch(0.96 0.015 50)`
-- **Em Execução**: `oklch(0.55 0.15 210)` (Dynamic ocean blue) | Bg: `oklch(0.94 0.02 210)`
-- **Concluído / Superado**: `oklch(0.58 0.13 160)` (Preserved green) | Bg: `oklch(0.95 0.015 160)`
-- **Mudança de Estratégia**: `oklch(0.58 0.11 320)` (Sophisticated violet) | Bg: `oklch(0.96 0.01 320)`
+**Key Characteristics:**
+- **Coastal Off-White Canvas**: Uso de fundos marinhos purificados e dessaturados para descanso visual.
+- **Immediate Structural Density**: Apresentação de dados de alta densidade no formato tabular original, evitando blocos inflados.
+- **Refined Interactivity**: Transições calmas baseadas em estados de micro-movimento para reações ao cursor e toques.
 
 ---
 
-## Typography
+## 2. Colors
 
-- **Display & Headers**: **Outfit** (Weights: 300, 400, 500, 600, 700) — A modern, geometric sans-serif loaded from Google Fonts. Used for brand headings, card numbers, and section highlights.
-- **Body, Table & Text**: **Plus Jakarta Sans** (Weights: 300, 400, 500, 600, 700) — Highly readable and spaced beautifully for technical data points.
-- **Copy Restrictions**: Never use all-caps for long paragraphs. All caps is restricted to status labels, eyebrows, and short metadata tags under 4 words.
+O sistema de cores é inteiramente derivado das paisagens naturais e marinhas de Navegantes (SC), traduzido no espaço de cores OKLCH para controle preciso de luminosidade e acessibilidade WCAG 2.1 AA (contraste > 4.5:1 para dados e > 7:1 para cabeçalhos).
+
+### Primary
+- **Deep Marine Blue** (`#2c8ebb` / `oklch(0.55 0.16 220)`): O azul marítimo é o vetor primário de interatividade. Usado estritamente para destacar itens ativos, termos do glossário costeiro e botões de chamada primários.
+  - Variação clara (`#ebf4f8` / `oklch(0.94 0.02 220)`): Usado como plano de fundo de destaque tátil.
+
+### Secondary
+- **Restinga Flora Green** (`#2eb37f` / `oklch(0.60 0.14 165)`): Representa a preservação ecológica e a flora costeira. Utilizado para o status "Concluído / Superado" e indicadores de monitoramento ambiental de sucesso.
+  - Variação clara (`#edf8f4` / `oklch(0.95 0.02 165)`): Fundo de destaque ecológico.
+
+### Tertiary
+- **Sandy Beach Gold** (`#d1a843` / `oklch(0.72 0.12 70)`): Representa a faixa de areia da praia urbana. Empregado para o status "Previsto / Planejado".
+  - Variação clara (`#fbf6e7` / `oklch(0.96 0.02 70)`): Fundo de destaque arenoso.
+
+### Neutral
+- **Coastal Off-White** (`#f7fafb` / `oklch(0.985 0.004 220)`): Fundo principal da aplicação. Um tom frio marinho extremamente leve que reduz a emissão de luz azul.
+- **Ocean Deep Navy** (`#0d1e28` / `oklch(0.18 0.02 240)`): Tinta tipográfica principal, oferecendo legibilidade superior.
+- **Soft Slate Blue** (`#4b5e6b` / `oklch(0.42 0.02 240)`): Tinta secundária para legendas, rótulos e bordas neutras.
+- **Muted Ink** (`#6e808e` / `oklch(0.55 0.015 240)`): Metadados sutis e descrições.
+
+### Named Rules
+**The Rarity Rule.** O azul primário e o verde ecológico aparecem apenas em componentes de destaque e ação. A sua parcimônia é o que orienta a atenção do usuário para o que de fato importa.
 
 ---
 
-## Layout & Components
+## 3. Typography
 
-### 1. App Shell
-- **Desktop (>= 992px)**: Sidebar navigation on the left (`width: 320px`), stickily attached. Content explorer on the right (`flex-grow: 1`), max-width restricted to `1400px` for optimal grid scanning.
-- **Mobile (< 992px)**: Single column with a bottom padding buffer of `5rem` to leave space for the floating action button. The left sidebar collapses into an slide-out drawer on the right.
+A tipografia estabelece hierarquia rígida por meio de contrastes nítidos de pesos e tamanhos, utilizando fontes premium hospedadas no Google Fonts.
 
-### 2. Explorer Card (Tabela)
-- High-fidelity table that automatically reflows to responsive cards on viewport widths below `768px`.
-- Interactivity: Rows are hoverable, yielding an interactive background transition to a soft blue tint (`rgba(0, 160, 220, 0.015)`).
+**Display Font:** Outfit (Weights: 300, 400, 500, 600, 700)
+**Body Font:** Plus Jakarta Sans (Weights: 300, 400, 500, 600, 700)
 
-### 3. Detail Slide-Over Panel
-- Smoothly slides out from the right (`transform: translateX(0)`) using a premium easing transition (`cubic-bezier(0.16, 1, 0.3, 1)`).
-- Mobile viewport (< 768px) expands the slide-over to full width (`100vw`) for comfortable reading.
+**Character:** A Outfit confere uma estrutura geométrica sofisticada para títulos e números, enquanto a Plus Jakarta Sans atua como o motor de leitura denso e altamente espaçado para dados analíticos.
 
-### 4. Collapsible Filter Groups (Accordions)
-- Filter groups in the sidebar use semantic `<details>` and `<summary>` structures, removing default browser markers for a custom vector chevron indicator.
-- Accordions animate dynamically upon expansion via a smooth slide-down and fade-in keyframe transition (`slideDown`).
-- To prevent excessive scrolling inside the mobile drawer, the longest lists ("Linhas de Ação", "Secretaria / Responsável", and "Status") are programmatically collapsed during application initialization on viewports narrower than `992px`.
+### Hierarchy
+- **Display** (Bold (700), `2.5rem`, `1.15`): Usado exclusivamente para logotipos, títulos de páginas de alto nível e números de KPIs.
+- **Headline** (Semi-Bold (600), `1.5rem`, `1.3`): Títulos de seções principais como o explorador de ações.
+- **Title** (Semi-Bold (600), `1.1rem`, `1.4`): Títulos de cartões e cabeçalhos de grupos de filtros.
+- **Body** (Regular (400), `0.95rem`, `1.6`): Textos corridos de descrição das ações e metas (comprimento de linha restrito a `75ch` para leitura otimizada).
+- **Label** (Bold (700), `0.75rem`, `1.2`, ALL-CAPS): Siglas, tags de status e termos do glossário.
 
+---
+
+## 4. Elevation
+
+O sistema rejeita elevações volumétricas exageradas baseadas em sombras pretas duras. Profundidade e foco visual são criados prioritariamente por meio de camadas neutras e transparências sutis (glassmorphism), garantindo um visual limpo e refinado.
+
+### Shadow Vocabulary
+- **Interactive Sm** (`box-shadow: 0 4px 12px rgba(0, 30, 60, 0.03)`): Usado em cartões de resumo estático.
+- **Overlay Lg** (`box-shadow: 0 16px 48px rgba(0, 30, 60, 0.08)`): Usado exclusivamente para painéis sobrepostos móveis (drawer de filtros e slide-over).
+
+### Named Rules
+**The Tonal Flat Rule.** Superfícies permanecem estritamente planas em seu estado de repouso. Sombras discretas surgem apenas em resposta a interações de hover ou em estados flutuantes (overlays).
+
+---
+
+## 5. Components
+
+Os componentes visuais seguem uma lógica de design "Refinado e Restrito", focados em clareza extrema.
+
+### Buttons
+- **Shape:** Bordas suavemente arredondadas (`8px` de raio).
+- **Primary:** Fundo azul mar (`#2c8ebb`), tipografia Plus Jakarta Sans Bold, cor branca, preenchimento (`10px 20px`).
+- **Hover / Focus:** Transição de fundo para azul escuro (`#1f6f96`) em `200ms` com atenuação linear suave.
+
+### Explorer Table
+- **Shape:** Bordas arredondadas externas no contêiner (`12px` de raio).
+- **Row States:** Hover aciona transição de fundo suave para um azul marinho diluído (`rgba(0, 160, 220, 0.015)`) para manter o foco na linha selecionada.
+- **Mobile Viewport:** Transforma-se em tabela nativa horizontalmente rolável (`min-width: 720px`) com células extra compactas (`padding: 0.75rem 0.5rem`) para visualização de mais de 10 ações simultâneas.
+
+### Detail Slide-Over
+- **Transition:** Desliza suavemente a partir do canto direito (`transform: translateX(0)`) com curva de aceleração exponencial (`cubic-bezier(0.16, 1, 0.3, 1)`) em `300ms`.
+- **Overlay:** Fundo com desfoque de vidro (`backdrop-filter: blur(4px)`) para foco total nas informações.
+
+### Collapsible Accordions
+- **State:** Filtros colapsados por padrão no carregamento inicial (`open` ausente).
+- **Chevron:** Chevron vetorial rotaciona suavemente (`180deg`) ao expandir.
+
+### Smart Glossary Tooltips
+- **Interaction:** Apresentação dinâmica disparada ao pairar o cursor (hover) ou focar pelo teclado (`tabindex="0"`).
+- **Rendering:** Centralizado e projetado fora de qualquer contêiner com `overflow: hidden`, eliminando cortes visuais.
+
+---
+
+## 6. Do's and Don'ts
+
+Guardrails e limites estritos do design system para garantir integridade contínua:
+
+### Do:
+- **Do** manter a tabela nativa responsiva horizontal em celulares para visualização densa de dados.
+- **Do** manter todos os grupos de filtros laterais colapsados por padrão para economizar espaço vertical.
+- **Do** garantir contraste tipográfico mínimo de 4.5:1 em todos os rótulos secundários e badges de status.
+- **Do** utilizar exclusivamente os pesos e fontes oficiais *Outfit* e *Plus Jakarta Sans*.
+
+### Don't:
+- **Don't** utilizar bordas decorativas grossas unilaterais coloridas (side-stripe borders) maior que 1px em cards ou alertas.
+- **Don't** aplicar gradientes multicoloridos de fundo ou em recortes de texto (gradient text).
+- **Don't** forçar a listagem mobile a se empilhar em cards isolados de rolagem vertical infinita.
+- **Don't** utilizar sombras escuras saturadas tridimensionais (shadows com opacidade maior que 8% em tom preto puro).
