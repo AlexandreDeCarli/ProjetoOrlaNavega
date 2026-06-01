@@ -918,9 +918,10 @@ a:hover {
   }
 }
 
-/* ==========================================================================
-   RESPONSIVIDADE E ADAPTAÇÃO MÓVEL PREMIUM
-   ========================================================================== */
+/* Barra de Topo Móvel (Mobile Only Header) */
+.mobile-top-bar {
+  display: none; /* Escondido por padrão no Desktop */
+}
 
 /* Botão Flutuante de Filtros (Escondido por padrão no Desktop) */
 .mobile-filter-fab {
@@ -978,11 +979,77 @@ a:hover {
     flex-direction: column;
   }
 
-  /* Exibe o FAB de Filtros no Mobile */
+  /* Oculta o FAB flutuante de filtros (substituído pelo menu sanduíche fixo no topo) */
   .mobile-filter-fab {
+    display: none !important;
+  }
+
+  /* Exibe e estiliza o cabeçalho fixo de topo no celular */
+  .mobile-top-bar {
     display: flex;
-    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-    animation-delay: 0.3s;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(60px + env(safe-area-inset-top, 0px));
+    padding: calc(env(safe-area-inset-top, 0px)) 1.5rem 0 1.5rem;
+    background-color: var(--bg-surface-opaque);
+    border-bottom: 1px solid var(--border-light);
+    z-index: 900;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mobile-top-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mobile-top-logo {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--accent-costal), var(--accent-eco));
+    border-radius: 8px;
+    padding: 6px;
+    fill: none;
+    stroke: white;
+    stroke-width: 2.5;
+  }
+
+  .mobile-top-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .mobile-menu-hamburger {
+    background: rgba(0, 40, 80, 0.04);
+    border: none;
+    border-radius: 50%;
+    width: 44px; /* Standard accessible target size */
+    height: 44px; /* Standard accessible target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    color: var(--text-primary);
+  }
+
+  .mobile-menu-hamburger:hover {
+    background: rgba(0, 40, 80, 0.08);
+  }
+
+  .hamburger-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
   }
 
   /* Transforma o Sidebar em uma Gaveta Flutuante de Alto Nível */
@@ -1046,7 +1113,10 @@ a:hover {
   }
 
   .app-content {
-    padding: 1.5rem 1.5rem calc(5rem + env(safe-area-inset-bottom, 0px)) 1.5rem; /* Padding inferior maior para liberar espaço para o FAB e safe-area */
+    padding-top: calc(76px + env(safe-area-inset-top, 0px)); /* Espaço fixado para o cabeçalho superior + margem */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px)); /* Padding inferior acessível */
   }
 }
 

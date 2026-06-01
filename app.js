@@ -158,6 +158,7 @@ const DOM = {
 
   // Filtros Mobile
   mobileFilterFab: document.getElementById('mobile-filter-fab'),
+  mobileMenuHamburger: document.getElementById('mobile-menu-hamburger'),
   sidebarCloseBtn: document.getElementById('sidebar-close-btn'),
   sidebar: document.getElementById('app-sidebar'),
   sidebarOverlay: document.getElementById('sidebar-overlay')
@@ -613,6 +614,10 @@ const bindEvents = () => {
 
   if (DOM.mobileFilterFab) {
     DOM.mobileFilterFab.addEventListener('click', openMobileSidebar);
+  }
+
+  if (DOM.mobileMenuHamburger) {
+    DOM.mobileMenuHamburger.addEventListener('click', openMobileSidebar);
   }
 
   if (DOM.sidebarCloseBtn) {

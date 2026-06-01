@@ -7,12 +7,27 @@
   
   <title>PGI Orla Navegantes - Monitoramento de Ações Costeiras</title>
   
-  <!-- Estilos Globais -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Estilos Globais (Com Cache Buster) -->
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
   <div class="app-container">
+    
+    <!-- BARRA DE TOPO MÓVEL (MOBILE NAV BAR) -->
+    <header class="mobile-top-bar" id="mobile-top-bar">
+      <div class="mobile-top-brand">
+        <svg viewBox="0 0 24 24" class="mobile-top-logo">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+        </svg>
+        <span class="mobile-top-title">PGI Orla</span>
+      </div>
+      <button class="mobile-menu-hamburger" id="mobile-menu-hamburger" aria-label="Abrir Filtros">
+        <svg viewBox="0 0 24 24" class="hamburger-icon">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </header>
     
     <!-- SIDEBAR: FILTROS E BUSCA -->
     <aside class="app-sidebar" id="app-sidebar" aria-label="Filtros e Busca">
