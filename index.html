@@ -8,7 +8,7 @@
   <title>PGI Orla Navegantes - Monitoramento de Ações Costeiras</title>
   
   <!-- Estilos Globais (Com Cache Buster) -->
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <svg viewBox="0 0 24 24" class="mobile-top-logo">
           <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
         </svg>
-        <span class="mobile-top-title">PGI Orla</span>
+        <span class="mobile-top-title"><abbr class="glossary-term" tabindex="0" data-tooltip="PGI (Plano de Gestão Integrada): Instrumento estratégico para o uso sustentável da orla costeira.">PGI</abbr> Orla</span>
       </div>
       <button class="mobile-menu-hamburger" id="mobile-menu-hamburger" aria-label="Abrir Filtros">
         <svg viewBox="0 0 24 24" class="hamburger-icon">
@@ -44,7 +44,7 @@
               </svg>
             </div>
             <div class="brand-name">
-              <h1>PGI Orla</h1>
+              <h1><abbr class="glossary-term" tabindex="0" data-tooltip="PGI (Plano de Gestão Integrada): Instrumento estratégico municipal para o planejamento e uso ordenado da orla.">PGI</abbr> Orla</h1>
               <span>Navegantes - SC</span>
             </div>
           </div>
@@ -75,10 +75,10 @@
 
         <!-- Filtro: Unidades de Planejamento (UP) -->
         <details class="filter-group filter-group-details" id="group-up">
-          <summary class="filter-group-summary">Unidade de Planejamento</summary>
+          <summary class="filter-group-summary">Unidade de Planejamento (<abbr class="glossary-term" tabindex="0" data-tooltip="UP (Unidade de Planejamento): Divisão geográfica da orla costeira para fins de planejamento e gestão específica.">UP</abbr>)</summary>
           <div class="filter-options" id="filter-up-options">
             <button class="filter-btn active" data-filter="up" data-value="all">
-              <span>Todas as UPs</span>
+              <span>Todas as <abbr class="glossary-term" tabindex="0" data-tooltip="UPs (Unidades de Planejamento): Divisões ecológicas e funcionais da orla marítima e fluvial.">UPs</abbr></span>
               <span class="filter-count" id="count-up-all">0</span>
             </button>
             <button class="filter-btn" data-filter="up" data-value="UP1">
@@ -142,7 +142,7 @@
       <!-- Cabeçalho das Páginas -->
       <header class="orla-header">
         <h2>Monitoramento do Plano de Orla</h2>
-        <p>Acompanhamento transparente das ações e diretrizes do Plano de Gestão Integrada (PGI) da Orla do Município de Navegantes - SC, em conformidade com o Termo de Adesão à Gestão de Praias (TAGP).</p>
+        <p>Acompanhamento transparente das ações e diretrizes do <abbr class="glossary-term" tabindex="0" data-tooltip="PGI (Plano de Gestão Integrada): Instrumento de planejamento estratégico que reúne ações municipais para preservação e desenvolvimento da orla.">Plano de Gestão Integrada (PGI)</abbr> da Orla do Município de Navegantes - SC, em conformidade com o <abbr class="glossary-term" tabindex="0" data-tooltip="TAGP (Termo de Adesão à Gestão de Praias): Instrumento jurídico que transfere ao município a gestão direta de suas praias marítimas federais.">Termo de Adesão à Gestão de Praias (TAGP)</abbr>.</p>
       </header>
 
       <!-- DASHBOARD: CARDS KPI (VISÃO GERAL) -->
@@ -162,7 +162,7 @@
           <div class="kpi-progress-container">
             <div class="kpi-progress-bar" id="kpi-total-bar" style="width: 100%;"></div>
           </div>
-          <div class="kpi-desc">Mapeadas nas UPs 1, 2 e 3</div>
+          <div class="kpi-desc">Mapeadas nas <abbr class="glossary-term" tabindex="0" data-tooltip="UPs (Unidades de Planejamento): UP1 (Fluvial - Rio Gravatá), UP2 (Marítima - Gravatá ao Pontal) e UP3 (Fluvial - Centro e Foz do Rio Itajaí-Açu).">UPs</abbr> 1, 2 e 3</div>
         </article>
 
         <!-- KPI 2: Concluídas / Superadas -->
@@ -246,7 +246,7 @@
                 <th scope="col">Linha de Ação</th>
                 <th scope="col">Diretriz / Ação Mapeada</th>
                 <th scope="col">Responsável</th>
-                <th scope="col">UP</th>
+                <th scope="col"><abbr class="glossary-term" tabindex="0" data-tooltip="UP (Unidade de Planejamento): Divisão geográfica da orla municipal.">UP</abbr></th>
                 <th scope="col">Status</th>
               </tr>
             </thead>
@@ -308,8 +308,11 @@
     <span>Filtros</span>
   </button>
 
+  <!-- Elemento de Tooltip Global -->
+  <div id="global-tooltip" class="global-tooltip" aria-hidden="true"></div>
+
   <!-- Lógica da Aplicação (Com Cache Buster) -->
-  <script type="module" src="app.js?v=4"></script>
+  <script type="module" src="app.js?v=5"></script>
 
 </body>
 </html>

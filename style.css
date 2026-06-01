@@ -1273,3 +1273,48 @@ a:hover {
 .filter-btn:active, .sort-select:active {
   transform: scale(0.98);
 }
+
+/* ==========================================================================
+   GLOSSÁRIO & TOOLTIPS INTELIGENTES (IMPECCABLE CLARIFY)
+   ========================================================================== */
+
+.glossary-term {
+  text-decoration: underline dotted var(--accent-costal);
+  text-underline-offset: 4px;
+  cursor: help;
+  position: relative;
+  font-style: normal;
+  transition: var(--transition-smooth);
+}
+
+.glossary-term:hover, .glossary-term:focus-visible {
+  color: var(--accent-costal);
+  text-decoration-color: var(--accent-eco);
+  outline: none;
+}
+
+.global-tooltip {
+  position: fixed;
+  background-color: var(--text-primary);
+  color: var(--bg-surface-opaque);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.4;
+  width: 280px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px) scale(0.97);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 9999; /* Escapa qualquer restrição de estouro de empilhamento */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  word-wrap: break-word;
+}
+
+.global-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}

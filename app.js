@@ -414,13 +414,27 @@ const renderTable = () => {
     // Estilo específico para badges de UP
     const upClass = action.unidade.toLowerCase();
 
+    const upDescriptions = {
+      'UP1': 'UP1 (Fluvial - Gravatá foz): Área ao longo do Rio Gravatá até a foz.',
+      'UP2': 'UP2 (Marítima - Gravatá/Pontal): Orla marítima arenosa (Gravatá, Centro, Pontal).',
+      'UP3': 'UP3 (Fluvial - Centro/Porto): Área fluvial do Rio Itajaí-Açu, porto e centro histórico.'
+    };
+    const upTooltip = upDescriptions[action.unidade] || 'Unidade de Planejamento da Orla.';
+
+    const statusDescriptions = {
+      'superada': 'Concluído/Superado: Esta diretriz ou ação foi totalmente concluída de forma satisfatória.',
+      'execucao': 'Em Execução: Ação em fase ativa de implementação pelo órgão responsável.',
+      'previsto': 'Previsto/Planejado: Ação do plano de orla planejada para execução, aguardando início.'
+    };
+    const statusTooltip = statusDescriptions[statusCat] || `Status: ${action.status}`;
+
     tr.innerHTML = `
       <td class="col-num">#${action.n}</td>
       <td data-label="Categoria" style="font-weight: 600; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.02em;">${action.linhaAcao}</td>
       <td class="col-action">${action.acao}</td>
       <td data-label="Responsável" class="col-responsavel" style="font-size: 0.8rem; line-height: 1.3;">${action.pasta}</td>
-      <td data-label="UP"><span class="badge-up ${upClass}">${action.unidade}</span></td>
-      <td data-label="Status"><span class="badge-status ${statusCat}" title="${action.status}">${shortStatus}</span></td>
+      <td data-label="UP"><span class="badge-up ${upClass} glossary-term" tabindex="0" data-tooltip="${upTooltip}">${action.unidade}</span></td>
+      <td data-label="Status"><span class="badge-status ${statusCat} glossary-term" tabindex="0" data-tooltip="${statusTooltip}">${shortStatus}</span></td>
     `;
 
     tr.addEventListener('click', () => openSlideOver(action));
@@ -436,11 +450,28 @@ const openSlideOver = (action) => {
   const statusCat = getStatusCategory(action.status);
   
   DOM.detailId.textContent = `AÇÃO Nº ${action.n}`;
-  DOM.detailUp.textContent = action.unidade;
-  DOM.detailUp.className = `badge-up ${action.unidade.toLowerCase()}`;
   
+  const upDescriptions = {
+    'UP1': 'UP1 (Fluvial - Gravatá foz): Área ao longo do Rio Gravatá até a foz.',
+    'UP2': 'UP2 (Marítima - Gravatá/Pontal): Orla marítima arenosa (Gravatá, Centro, Pontal).',
+    'UP3': 'UP3 (Fluvial - Centro/Porto): Área fluvial do Rio Itajaí-Açu, porto e centro histórico.'
+  };
+  const upTooltip = upDescriptions[action.unidade] || 'Unidade de Planejamento da Orla.';
+  DOM.detailUp.textContent = action.unidade;
+  DOM.detailUp.className = `badge-up ${action.unidade.toLowerCase()} glossary-term`;
+  DOM.detailUp.setAttribute('data-tooltip', upTooltip);
+  DOM.detailUp.setAttribute('tabindex', '0');
+  
+  const statusDescriptions = {
+    'superada': 'Concluído/Superado: Esta diretriz ou ação foi totalmente concluída de forma satisfatória.',
+    'execucao': 'Em Execução: Ação em fase ativa de implementação pelo órgão responsável.',
+    'previsto': 'Previsto/Planejado: Ação do plano de orla planejada para execução, aguardando início.'
+  };
+  const statusTooltip = statusDescriptions[statusCat] || `Status: ${action.status}`;
   DOM.detailStatus.textContent = action.status;
-  DOM.detailStatus.className = `badge-status ${statusCat}`;
+  DOM.detailStatus.className = `badge-status ${statusCat} glossary-term`;
+  DOM.detailStatus.setAttribute('data-tooltip', statusTooltip);
+  DOM.detailStatus.setAttribute('tabindex', '0');
 
   // Criar HTML estruturado para o conteúdo rico
   DOM.detailContent.innerHTML = `
@@ -463,7 +494,7 @@ const openSlideOver = (action) => {
         <div class="detail-value" style="display: flex; gap: 0.35rem; flex-wrap: wrap; margin-top: 0.25rem; margin-bottom: 0.35rem;">
           ${getActionOrgs(action).map(org => {
             const orgData = ORGANIZACOES_NORMALIZADAS.find(o => o.key === org) || { label: org };
-            return `<span class="badge-up" style="background-color: var(--accent-costal-light); color: var(--accent-costal); font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.4rem; border-radius: 4px;" title="${orgData.label}">${org}</span>`;
+            return `<span class="badge-up glossary-term" tabindex="0" data-tooltip="${orgData.label}" style="background-color: var(--accent-costal-light); color: var(--accent-costal); font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.4rem; border-radius: 4px; cursor: help;">${org}</span>`;
           }).join('')}
         </div>
         <div class="detail-value" style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.3;">
@@ -630,10 +661,95 @@ const bindEvents = () => {
 };
 
 // ==========================================================================
+// GLOSSÁRIO E TOOLTIPS INTELIGENTES (IMPECCABLE CLARIFY)
+// ==========================================================================
+
+const initTooltipSystem = () => {
+  const tooltip = document.getElementById('global-tooltip');
+  if (!tooltip) return;
+
+  const showTooltip = (clientX, clientY, text) => {
+    tooltip.textContent = text;
+    tooltip.classList.add('visible');
+    positionTooltip(clientX, clientY);
+  };
+
+  const hideTooltip = () => {
+    tooltip.classList.remove('visible');
+  };
+
+  const positionTooltip = (clientX, clientY) => {
+    const tooltipWidth = tooltip.offsetWidth || 280;
+    const tooltipHeight = tooltip.offsetHeight || 60;
+    const gap = 12;
+
+    let x = clientX - tooltipWidth / 2;
+    let y = clientY - tooltipHeight - gap;
+
+    // Prevenir transbordamento nas laterais
+    if (x < gap) x = gap;
+    if (x + tooltipWidth > window.innerWidth - gap) {
+      x = window.innerWidth - tooltipWidth - gap;
+    }
+
+    // Prevenir transbordamento no topo (mostrar abaixo do cursor)
+    if (y < gap) {
+      y = clientY + gap + 15;
+    }
+
+    tooltip.style.left = `${x}px`;
+    tooltip.style.top = `${y}px`;
+  };
+
+  // Eventos de Mouse
+  document.addEventListener('mouseover', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (target) {
+      showTooltip(e.clientX, e.clientY, target.getAttribute('data-tooltip'));
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (target && tooltip.classList.contains('visible')) {
+      positionTooltip(e.clientX, e.clientY);
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (target) {
+      hideTooltip();
+    }
+  });
+
+  // Acessibilidade (Foco via Teclado)
+  document.addEventListener('focusin', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (target) {
+      const rect = target.getBoundingClientRect();
+      const clientX = rect.left + rect.width / 2;
+      const clientY = rect.top;
+      showTooltip(clientX, clientY, target.getAttribute('data-tooltip'));
+    }
+  });
+
+  document.addEventListener('focusout', (e) => {
+    const target = e.target.closest('[data-tooltip]');
+    if (target) {
+      hideTooltip();
+    }
+  });
+};
+
+// ==========================================================================
 // INICIALIZAÇÃO DO APLICATIVO
 // ==========================================================================
 
 const init = async () => {
+  // Inicializar o sistema de tooltips
+  initTooltipSystem();
+
   // Estado visual de carregamento nos dados
   DOM.explorerTitleCount.textContent = 'Buscando dados em tempo real do Google Sheets...';
   
