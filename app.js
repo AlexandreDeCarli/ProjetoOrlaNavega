@@ -102,10 +102,15 @@ const ORGANIZACOES_NORMALIZADAS = [
 
 // Helper para descobrir quais organizações estão associadas a uma ação (lendo da coluna Pastas Relacionadas / Pasta)
 const getActionOrgs = (action) => {
-  const normPasta = action.pasta.toLowerCase();
+  const pastaVal = action.pasta || action.responsavel || '';
+  const normPasta = pastaVal.toLowerCase();
   const orgs = [];
   ORGANIZACOES_NORMALIZADAS.forEach(org => {
-    const isMatch = org.match.some(m => normPasta.includes(m));
+    const isMatch = org.match.some(m => {
+      // Prevenir falso positivo: "cultura" está contido em "agriCULTURA", que pertence à SEAP
+      if (m === 'cultura' && normPasta.includes('agricultura')) return false;
+      return normPasta.includes(m);
+    });
     if (isMatch) {
       orgs.push(org.key);
     }
