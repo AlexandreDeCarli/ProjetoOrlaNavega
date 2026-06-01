@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Sistema de Monitoramento do Plano de Gestão Integrado da Orla (PGI Orla) de Navegantes - SC. Acompanhe ações de conservação, turismo, infraestrutura e segurança da orla marítima e fluvial.">
   
   <title>PGI Orla Navegantes - Monitoramento de Ações Costeiras</title>
@@ -15,7 +15,17 @@
   <div class="app-container">
     
     <!-- SIDEBAR: FILTROS E BUSCA -->
-    <aside class="app-sidebar" aria-label="Filtros e Busca">
+    <aside class="app-sidebar" id="app-sidebar" aria-label="Filtros e Busca">
+      
+      <!-- Cabeçalho de Filtros Móvel -->
+      <div class="sidebar-mobile-header" id="sidebar-mobile-header">
+        <h3>Filtros de Pesquisa</h3>
+        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Fechar Filtros">
+          <svg viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
       
       <!-- Logo da Marca -->
       <div class="brand-section">
@@ -237,7 +247,8 @@
 
   </div>
 
-  <!-- SLIDE-OVER: DETALHAMENTO DE UMA AÇÃO (GAVETA DE DETALHES) -->
+  <!-- OVERLAYS E DIÁLOGOS MÓVEIS -->
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
   <div class="slideover-overlay" id="detail-overlay" aria-hidden="true"></div>
   
   <aside class="slideover-panel" id="detail-panel" aria-labelledby="slideover-action-title">
@@ -264,6 +275,14 @@
     </div>
 
   </aside>
+
+  <!-- Botão de Filtros Flutuante (Mobile Only) -->
+  <button class="mobile-filter-fab" id="mobile-filter-fab" aria-label="Abrir Filtros">
+    <svg viewBox="0 0 24 24" class="fab-icon">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+    </svg>
+    <span>Filtros</span>
+  </button>
 
   <!-- Lógica da Aplicação (Com Cache Buster) -->
   <script type="module" src="app.js?v=4"></script>

@@ -154,7 +154,13 @@ const DOM = {
   detailContent: document.getElementById('detail-content'),
   detailId: document.getElementById('detail-id'),
   detailUp: document.getElementById('detail-up'),
-  detailStatus: document.getElementById('detail-status')
+  detailStatus: document.getElementById('detail-status'),
+
+  // Filtros Mobile
+  mobileFilterFab: document.getElementById('mobile-filter-fab'),
+  sidebarCloseBtn: document.getElementById('sidebar-close-btn'),
+  sidebar: document.getElementById('app-sidebar'),
+  sidebarOverlay: document.getElementById('sidebar-overlay')
 };
 
 // ==========================================================================
@@ -409,11 +415,11 @@ const renderTable = () => {
 
     tr.innerHTML = `
       <td class="col-num">#${action.n}</td>
-      <td style="font-weight: 600; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.02em;">${action.linhaAcao}</td>
+      <td data-label="Categoria" style="font-weight: 600; color: var(--text-secondary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.02em;">${action.linhaAcao}</td>
       <td class="col-action">${action.acao}</td>
-      <td class="col-responsavel" style="font-size: 0.8rem; line-height: 1.3;">${action.pasta}</td>
-      <td><span class="badge-up ${upClass}">${action.unidade}</span></td>
-      <td><span class="badge-status ${statusCat}" title="${action.status}">${shortStatus}</span></td>
+      <td data-label="Responsável" class="col-responsavel" style="font-size: 0.8rem; line-height: 1.3;">${action.pasta}</td>
+      <td data-label="UP"><span class="badge-up ${upClass}">${action.unidade}</span></td>
+      <td data-label="Status"><span class="badge-status ${statusCat}" title="${action.status}">${shortStatus}</span></td>
     `;
 
     tr.addEventListener('click', () => openSlideOver(action));
@@ -587,6 +593,35 @@ const bindEvents = () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeSlideOver();
   });
+
+  // Abrir / Fechar filtros no Mobile
+  const openMobileSidebar = () => {
+    if (DOM.sidebar) DOM.sidebar.classList.add('active');
+    if (DOM.sidebarOverlay) {
+      DOM.sidebarOverlay.classList.add('active');
+      DOM.sidebarOverlay.setAttribute('aria-hidden', 'false');
+    }
+  };
+
+  const closeMobileSidebar = () => {
+    if (DOM.sidebar) DOM.sidebar.classList.remove('active');
+    if (DOM.sidebarOverlay) {
+      DOM.sidebarOverlay.classList.remove('active');
+      DOM.sidebarOverlay.setAttribute('aria-hidden', 'true');
+    }
+  };
+
+  if (DOM.mobileFilterFab) {
+    DOM.mobileFilterFab.addEventListener('click', openMobileSidebar);
+  }
+
+  if (DOM.sidebarCloseBtn) {
+    DOM.sidebarCloseBtn.addEventListener('click', closeMobileSidebar);
+  }
+
+  if (DOM.sidebarOverlay) {
+    DOM.sidebarOverlay.addEventListener('click', closeMobileSidebar);
+  }
 };
 
 // ==========================================================================
