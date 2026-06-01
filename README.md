@@ -1,5 +1,7 @@
 # Sistema de Monitoramento do PGI Orla — Navegantes (SC)
 
+> 🌐 **Acesse a versão online de visualização:** [https://alexandredecarli.github.io/ProjetoOrlaNavega/](https://alexandredecarli.github.io/ProjetoOrlaNavega/)
+
 Este projeto consiste em uma plataforma web interativa, premium e responsiva desenvolvida para o **monitoramento em tempo real** das ações e diretrizes do **Plano de Gestão Integrada (PGI)** da Orla de Navegantes - SC. 
 
 A plataforma consome dados em tempo real de uma planilha de controle no Google Sheets e fornece aos gestores públicos, membros do Comitê Gestor Municipal e cidadãos uma visão clara, transparente e dinâmica do progresso de cada ação socioambiental planejada para as praias e rios do município.
