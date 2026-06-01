@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de Monitoramento do Plano de Gestão Integrado da Orla (PGI Orla) de Navegantes - SC. Acompanhe ações de conservação, turismo, infraestrutura e segurança da orla marítima e fluvial.">
+  
+  <title>PGI Orla Navegantes - Monitoramento de Ações Costeiras</title>
+  
+  <!-- Estilos Globais -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- SIDEBAR: FILTROS E BUSCA -->
+    <aside class="app-sidebar" aria-label="Filtros e Busca">
+      
+      <!-- Logo da Marca -->
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+          </svg>
+        </div>
+        <div class="brand-name">
+          <h1>PGI Orla</h1>
+          <span>Navegantes - SC</span>
+        </div>
+      </div>
+
+      <!-- Barra de Busca Global -->
+      <div class="filter-group">
+        <label for="search-input" class="filter-title">Busca de Ações</label>
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <input type="text" id="search-input" placeholder="Pesquisar ação, responsável, anexo...">
+        </div>
+      </div>
+
+      <!-- Filtro: Unidades de Planejamento (UP) -->
+      <div class="filter-group">
+        <span class="filter-title">Unidade de Planejamento</span>
+        <div class="filter-options" id="filter-up-options">
+          <button class="filter-btn active" data-filter="up" data-value="all">
+            <span>Todas as UPs</span>
+            <span class="filter-count" id="count-up-all">0</span>
+          </button>
+          <button class="filter-btn" data-filter="up" data-value="UP1">
+            <span>UP1 (Fluvial - Gravatá foz)</span>
+            <span class="filter-count" id="count-up-up1">0</span>
+          </button>
+          <button class="filter-btn" data-filter="up" data-value="UP2">
+            <span>UP2 (Marítima - Gravatá/Pontal)</span>
+            <span class="filter-count" id="count-up-up2">0</span>
+          </button>
+          <button class="filter-btn" data-filter="up" data-value="UP3">
+            <span>UP3 (Fluvial - Centro/Porto)</span>
+            <span class="filter-count" id="count-up-up3">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtro: Linhas de Ação -->
+      <div class="filter-group">
+        <span class="filter-title">Linhas de Ação</span>
+        <div class="filter-options" id="filter-topic-options">
+          <button class="filter-btn active" data-filter="topic" data-value="all">
+            <span>Todas as Categorias</span>
+            <span class="filter-count" id="count-topic-all">0</span>
+          </button>
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+
+      <!-- Filtro: Órgão Responsável -->
+      <div class="filter-group">
+        <span class="filter-title">Secretaria / Responsável</span>
+        <div class="filter-options" id="filter-responsavel-options">
+          <button class="filter-btn active" data-filter="responsavel" data-value="all">
+            <span>Todos os Órgãos</span>
+            <span class="filter-count" id="count-resp-all">0</span>
+          </button>
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+
+      <!-- Filtro: Status -->
+      <div class="filter-group">
+        <span class="filter-title">Status</span>
+        <div class="filter-options" id="filter-status-options">
+          <button class="filter-btn active" data-filter="status" data-value="all">
+            <span>Todos os Status</span>
+            <span class="filter-count" id="count-status-all">0</span>
+          </button>
+          <!-- Inserido dinamicamente via JS -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="app-content">
+      
+      <!-- Cabeçalho das Páginas -->
+      <header class="orla-header">
+        <h2>Monitoramento do Plano de Orla</h2>
+        <p>Acompanhamento transparente das ações e diretrizes do Plano de Gestão Integrada (PGI) da Orla do Município de Navegantes - SC, em conformidade com o Termo de Adesão à Gestão de Praias (TAGP).</p>
+      </header>
+
+      <!-- DASHBOARD: CARDS KPI (VISÃO GERAL) -->
+      <section class="dashboard-summary" aria-label="Resumo Estatístico das Ações">
+        
+        <!-- KPI 1: Total -->
+        <article class="kpi-card" style="--card-accent: var(--accent-costal); --icon-bg: var(--accent-costal-light); --icon-color: var(--accent-costal);">
+          <div class="kpi-header">
+            <h3 class="kpi-title">Total de Ações</h3>
+            <div class="kpi-icon-wrapper">
+              <svg class="kpi-icon" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpi-total-val">0</div>
+          <div class="kpi-progress-container">
+            <div class="kpi-progress-bar" id="kpi-total-bar" style="width: 100%;"></div>
+          </div>
+          <div class="kpi-desc">Mapeadas nas UPs 1, 2 e 3</div>
+        </article>
+
+        <!-- KPI 2: Concluídas / Superadas -->
+        <article class="kpi-card" style="--card-accent: var(--status-superada); --icon-bg: var(--status-superada-bg); --icon-color: var(--status-superada);">
+          <div class="kpi-header">
+            <h3 class="kpi-title">Concluídas / Superadas</h3>
+            <div class="kpi-icon-wrapper">
+              <svg class="kpi-icon" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0110 21a3.745 3.745 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.745 3.745 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpi-concluido-val">0</div>
+          <div class="kpi-progress-container">
+            <div class="kpi-progress-bar" id="kpi-concluido-bar"></div>
+          </div>
+          <div class="kpi-desc" id="kpi-concluido-desc">0% do plano executado</div>
+        </article>
+
+        <!-- KPI 3: Em Execução -->
+        <article class="kpi-card" style="--card-accent: var(--status-execucao); --icon-bg: var(--status-execucao-bg); --icon-color: var(--status-execucao);">
+          <div class="kpi-header">
+            <h3 class="kpi-title">Em Execução</h3>
+            <div class="kpi-icon-wrapper">
+              <svg class="kpi-icon" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpi-execucao-val">0</div>
+          <div class="kpi-progress-container">
+            <div class="kpi-progress-bar" id="kpi-execucao-bar"></div>
+          </div>
+          <div class="kpi-desc" id="kpi-execucao-desc">0% em andamento</div>
+        </article>
+
+        <!-- KPI 4: Previstas / Sob Análise -->
+        <article class="kpi-card" style="--card-accent: var(--status-previsto); --icon-bg: var(--status-previsto-bg); --icon-color: var(--status-previsto);">
+          <div class="kpi-header">
+            <h3 class="kpi-title">Previstas / Planejadas</h3>
+            <div class="kpi-icon-wrapper">
+              <svg class="kpi-icon" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value" id="kpi-previsto-val">0</div>
+          <div class="kpi-progress-container">
+            <div class="kpi-progress-bar" id="kpi-previsto-bar"></div>
+          </div>
+          <div class="kpi-desc" id="kpi-previsto-desc">0% planejadas para execução</div>
+        </article>
+
+      </section>
+
+      <!-- LISTAGEM DE AÇÕES (TABELA / EXPLORADOR) -->
+      <section class="explorer-card" aria-label="Explorador de Ações Costeiras">
+        
+        <header class="explorer-header">
+          <div class="explorer-info">
+            <h3 id="explorer-title-count">Carregando Ações Costeiras...</h3>
+            <p>Clique em qualquer item da tabela para visualizar o detalhamento completo no painel.</p>
+          </div>
+          <div class="explorer-controls">
+            <label for="sort-select" style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary);">Ordenar por:</label>
+            <select id="sort-select" class="sort-select">
+              <option value="num-asc">ID (Menor para Maior)</option>
+              <option value="num-desc">ID (Maior para Menor)</option>
+              <option value="linha-asc">Linha de Ação (A-Z)</option>
+              <option value="status-asc">Status</option>
+            </select>
+          </div>
+        </header>
+
+        <!-- Tabela -->
+        <div class="table-wrapper">
+          <table class="actions-table" id="actions-table">
+            <thead>
+              <tr>
+                <th scope="col" class="col-num">ID</th>
+                <th scope="col">Linha de Ação</th>
+                <th scope="col">Diretriz / Ação Mapeada</th>
+                <th scope="col">Responsável</th>
+                <th scope="col">UP</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody id="actions-table-body">
+              <!-- Preenchido dinamicamente via Javascript -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Estado de Busca Vazia -->
+        <div class="empty-state" id="empty-state" style="display: none;">
+          <svg class="empty-state-icon" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <h4>Nenhuma ação encontrada</h4>
+          <p>Tente ajustar os seus filtros de busca ou remover as palavras-chave para encontrar o que procura.</p>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- SLIDE-OVER: DETALHAMENTO DE UMA AÇÃO (GAVETA DE DETALHES) -->
+  <div class="slideover-overlay" id="detail-overlay" aria-hidden="true"></div>
+  
+  <aside class="slideover-panel" id="detail-panel" aria-labelledby="slideover-action-title">
+    
+    <header class="slideover-header">
+      <div class="slideover-title-section">
+        <div class="slideover-meta">
+          <span class="slideover-id" id="detail-id">AÇÃO Nº 0</span>
+          <span class="badge-up" id="detail-up">UP1</span>
+          <span class="badge-status" id="detail-status">Previsto</span>
+        </div>
+        <!-- Rótulo invisível para acessibilidade -->
+        <h2 id="slideover-action-title" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Detalhamento da Ação</h2>
+      </div>
+      <button class="slideover-close-btn" id="detail-close-btn" aria-label="Fechar Painel de Detalhes">
+        <svg class="slideover-close-icon" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </header>
+
+    <div class="slideover-content" id="detail-content">
+      <!-- Preenchido dinamicamente via JS -->
+    </div>
+
+  </aside>
+
+  <!-- Lógica da Aplicação (Com Cache Buster) -->
+  <script type="module" src="app.js?v=4"></script>
+
+</body>
+</html>
