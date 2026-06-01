@@ -112,18 +112,47 @@ a:hover {
   width: 320px;
   background-color: var(--bg-surface-opaque);
   border-right: 1px solid var(--border-light);
-  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   flex-shrink: 0;
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow-y: auto;
   z-index: 100;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-smooth);
+  overflow: hidden; /* O sidebar principal não tem scroll */
+}
+
+/* Seção de Cabeçalho e Busca Fixa */
+.sidebar-top {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  flex-shrink: 0; /* Não reduz o cabeçalho */
+}
+
+.sidebar-brand-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sidebar-close-btn {
+  display: none; /* Oculto no desktop por padrão */
+}
+
+/* Seção de Scroll dos Filtros */
+.sidebar-scroll {
+  flex-grow: 1; /* Ocupa a altura restante */
+  overflow-y: auto; /* Scrola independentemente */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 /* Conteúdo Principal */
@@ -144,8 +173,6 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-light);
 }
 
 .brand-logo {
@@ -973,27 +1000,23 @@ a:hover {
     transform: translateX(100%);
     transition: var(--transition-smooth);
     background-color: var(--bg-surface-opaque);
-    padding: calc(1.5rem + env(safe-area-inset-top, 0px)) calc(1.5rem + env(safe-area-inset-right, 0px)) calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
+    padding: 0; /* Padding removido do container geral */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
 
   .app-sidebar.active {
     transform: translateX(0);
   }
 
-  /* Cabeçalho de fechamento exclusivo do Mobile */
-  .sidebar-mobile-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border-light);
+  /* Padding com Suporte a safe areas no mobile drawer */
+  .sidebar-top {
+    padding: calc(1.5rem + env(safe-area-inset-top, 0px)) calc(1.5rem + env(safe-area-inset-right, 0px)) 1.25rem 1.5rem;
   }
 
-  .sidebar-mobile-header h3 {
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--text-primary);
+  .sidebar-scroll {
+    padding: 1.5rem 1.5rem calc(1.5rem + env(safe-area-inset-bottom, 0px)) 1.5rem;
   }
 
   .sidebar-close-btn {

@@ -17,98 +17,107 @@
     <!-- SIDEBAR: FILTROS E BUSCA -->
     <aside class="app-sidebar" id="app-sidebar" aria-label="Filtros e Busca">
       
-      <!-- Cabeçalho de Filtros Móvel -->
-      <div class="sidebar-mobile-header" id="sidebar-mobile-header">
-        <h3>Filtros de Pesquisa</h3>
-        <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Fechar Filtros">
-          <svg viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
+      <!-- Topo Fixo (Brand + Busca) -->
+      <div class="sidebar-top">
+        
+        <div class="sidebar-brand-wrapper">
+          <!-- Logo da Marca -->
+          <div class="brand-section">
+            <div class="brand-logo">
+              <svg viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
+              </svg>
+            </div>
+            <div class="brand-name">
+              <h1>PGI Orla</h1>
+              <span>Navegantes - SC</span>
+            </div>
+          </div>
+          
+          <!-- Botão de Fechar Gaveta (Mobile Only) -->
+          <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Fechar Filtros">
+            <svg viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Barra de Busca Global -->
+        <div class="filter-group">
+          <label for="search-input" class="filter-title">Busca de Ações</label>
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            <input type="text" id="search-input" placeholder="Pesquisar ação, responsável, anexo...">
+          </div>
+        </div>
+
       </div>
-      
-      <!-- Logo da Marca -->
-      <div class="brand-section">
-        <div class="brand-logo">
-          <svg viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
-          </svg>
-        </div>
-        <div class="brand-name">
-          <h1>PGI Orla</h1>
-          <span>Navegantes - SC</span>
-        </div>
+
+      <!-- Filtros com Scroll Interno -->
+      <div class="sidebar-scroll">
+
+        <!-- Filtro: Unidades de Planejamento (UP) -->
+        <details class="filter-group filter-group-details" id="group-up" open>
+          <summary class="filter-group-summary">Unidade de Planejamento</summary>
+          <div class="filter-options" id="filter-up-options">
+            <button class="filter-btn active" data-filter="up" data-value="all">
+              <span>Todas as UPs</span>
+              <span class="filter-count" id="count-up-all">0</span>
+            </button>
+            <button class="filter-btn" data-filter="up" data-value="UP1">
+              <span>UP1 (Fluvial - Gravatá foz)</span>
+              <span class="filter-count" id="count-up-up1">0</span>
+            </button>
+            <button class="filter-btn" data-filter="up" data-value="UP2">
+              <span>UP2 (Marítima - Gravatá/Pontal)</span>
+              <span class="filter-count" id="count-up-up2">0</span>
+            </button>
+            <button class="filter-btn" data-filter="up" data-value="UP3">
+              <span>UP3 (Fluvial - Centro/Porto)</span>
+              <span class="filter-count" id="count-up-up3">0</span>
+            </button>
+          </div>
+        </details>
+
+        <!-- Filtro: Linhas de Ação -->
+        <details class="filter-group filter-group-details" id="group-topic" open>
+          <summary class="filter-group-summary">Linhas de Ação</summary>
+          <div class="filter-options" id="filter-topic-options">
+            <button class="filter-btn active" data-filter="topic" data-value="all">
+              <span>Todas as Categorias</span>
+              <span class="filter-count" id="count-topic-all">0</span>
+            </button>
+            <!-- Inserido dinamicamente via JS -->
+          </div>
+        </details>
+
+        <!-- Filtro: Órgão Responsável -->
+        <details class="filter-group filter-group-details" id="group-responsavel" open>
+          <summary class="filter-group-summary">Secretaria / Responsável</summary>
+          <div class="filter-options" id="filter-responsavel-options">
+            <button class="filter-btn active" data-filter="responsavel" data-value="all">
+              <span>Todos os Órgãos</span>
+              <span class="filter-count" id="count-resp-all">0</span>
+            </button>
+            <!-- Inserido dinamicamente via JS -->
+          </div>
+        </details>
+
+        <!-- Filtro: Status -->
+        <details class="filter-group filter-group-details" id="group-status" open>
+          <summary class="filter-group-summary">Status</summary>
+          <div class="filter-options" id="filter-status-options">
+            <button class="filter-btn active" data-filter="status" data-value="all">
+              <span>Todos os Status</span>
+              <span class="filter-count" id="count-status-all">0</span>
+            </button>
+            <!-- Inserido dinamicamente via JS -->
+          </div>
+        </details>
+
       </div>
-
-      <!-- Barra de Busca Global -->
-      <div class="filter-group">
-        <label for="search-input" class="filter-title">Busca de Ações</label>
-        <div class="search-box">
-          <svg class="search-icon" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-          <input type="text" id="search-input" placeholder="Pesquisar ação, responsável, anexo...">
-        </div>
-      </div>
-
-      <!-- Filtro: Unidades de Planejamento (UP) -->
-      <details class="filter-group filter-group-details" id="group-up" open>
-        <summary class="filter-group-summary">Unidade de Planejamento</summary>
-        <div class="filter-options" id="filter-up-options">
-          <button class="filter-btn active" data-filter="up" data-value="all">
-            <span>Todas as UPs</span>
-            <span class="filter-count" id="count-up-all">0</span>
-          </button>
-          <button class="filter-btn" data-filter="up" data-value="UP1">
-            <span>UP1 (Fluvial - Gravatá foz)</span>
-            <span class="filter-count" id="count-up-up1">0</span>
-          </button>
-          <button class="filter-btn" data-filter="up" data-value="UP2">
-            <span>UP2 (Marítima - Gravatá/Pontal)</span>
-            <span class="filter-count" id="count-up-up2">0</span>
-          </button>
-          <button class="filter-btn" data-filter="up" data-value="UP3">
-            <span>UP3 (Fluvial - Centro/Porto)</span>
-            <span class="filter-count" id="count-up-up3">0</span>
-          </button>
-        </div>
-      </details>
-
-      <!-- Filtro: Linhas de Ação -->
-      <details class="filter-group filter-group-details" id="group-topic" open>
-        <summary class="filter-group-summary">Linhas de Ação</summary>
-        <div class="filter-options" id="filter-topic-options">
-          <button class="filter-btn active" data-filter="topic" data-value="all">
-            <span>Todas as Categorias</span>
-            <span class="filter-count" id="count-topic-all">0</span>
-          </button>
-          <!-- Inserido dinamicamente via JS -->
-        </div>
-      </details>
-
-      <!-- Filtro: Órgão Responsável -->
-      <details class="filter-group filter-group-details" id="group-responsavel" open>
-        <summary class="filter-group-summary">Secretaria / Responsável</summary>
-        <div class="filter-options" id="filter-responsavel-options">
-          <button class="filter-btn active" data-filter="responsavel" data-value="all">
-            <span>Todos os Órgãos</span>
-            <span class="filter-count" id="count-resp-all">0</span>
-          </button>
-          <!-- Inserido dinamicamente via JS -->
-        </div>
-      </details>
-
-      <!-- Filtro: Status -->
-      <details class="filter-group filter-group-details" id="group-status" open>
-        <summary class="filter-group-summary">Status</summary>
-        <div class="filter-options" id="filter-status-options">
-          <button class="filter-btn active" data-filter="status" data-value="all">
-            <span>Todos os Status</span>
-            <span class="filter-count" id="count-status-all">0</span>
-          </button>
-          <!-- Inserido dinamicamente via JS -->
-        </div>
-      </details>
 
     </aside>
 
