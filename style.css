@@ -1136,114 +1136,79 @@ a:hover {
     padding: 1.25rem;
   }
 
-  /* Refluxo da Tabela de Dados Costeiros em Cards no Mobile */
+  /* Mantém o formato de tabela nativo no Mobile com scroll horizontal fluido */
   .table-wrapper {
-    overflow-x: visible;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem; /* Estende o scroll até as bordas da tela */
+    padding: 0 1rem;
   }
 
-  .actions-table, 
-  .actions-table thead, 
-  .actions-table tbody, 
-  .actions-table tr, 
-  .actions-table td {
-    display: block;
+  .actions-table {
+    display: table !important;
+    width: 100%;
+    min-width: 720px; /* Garante espaço horizontal ideal para as colunas sem amassar o texto */
+    border-collapse: collapse;
   }
 
   .actions-table thead {
-    display: none; /* Esconde os cabeçalhos tradicionais */
+    display: table-header-group !important; /* Mostra os cabeçalhos das colunas */
+  }
+
+  .actions-table tbody {
+    display: table-row-group !important;
   }
 
   .actions-table tr {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    grid-template-rows: auto auto auto;
-    gap: 0.5rem 0.75rem;
-    padding: 1.15rem;
-    margin-bottom: 0.85rem;
-    background-color: var(--bg-surface-opaque);
-    border: 1px solid var(--border-light);
-    border-radius: 16px;
-    box-shadow: var(--shadow-sm);
-    transition: var(--transition-smooth);
-    position: relative;
-    cursor: pointer;
+    display: table-row !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
   }
 
-  .actions-table tr:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    border-color: rgba(0, 160, 220, 0.15);
+  .actions-table td, .actions-table th {
+    display: table-cell !important;
+    padding: 0.75rem 0.5rem !important; /* Padding compacto verticalmente */
+    font-size: 0.8rem !important; /* Fonte compacta e de alta legibilidade */
+    border-bottom: 1px solid var(--border-light) !important;
+    vertical-align: middle !important;
+    text-align: left !important;
+    white-space: normal !important;
   }
 
-  .actions-table td {
-    border-bottom: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    font-size: 0.85rem;
-  }
-
-  /* Posicionamento Inteligente em Grid das Informações do Card */
-  
-  /* ID da Ação */
-  .actions-table td.col-num {
-    grid-column: 1;
-    grid-row: 1;
-    font-size: 0.75rem;
+  /* Otimização de larguras de colunas no Mobile */
+  .actions-table th.col-num, .actions-table td.col-num {
+    width: 45px !important;
+    padding-left: 0.25rem !important;
     font-weight: 700;
-    color: var(--text-muted);
-    justify-content: flex-start;
   }
 
-  /* Categoria / Linha de Ação */
-  .actions-table td[data-label="Categoria"] {
-    grid-column: 2 / span 2;
-    grid-row: 1;
-    justify-content: flex-end;
-    font-size: 0.75rem;
-  }
-
-  /* Ação Principal (Destaque Central) */
   .actions-table td.col-action {
-    grid-column: 1 / span 3;
-    grid-row: 2;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    line-height: 1.45;
-    padding: 0.35rem 0 0.75rem 0;
-    border-bottom: 1px solid rgba(0, 40, 80, 0.05); /* Divisor sutil entre conteúdo e tags */
-    margin-bottom: 0.25rem;
-    display: block; /* Ocupa largura total */
-    text-align: left;
+    max-width: 280px !important; /* Evita que a coluna de ação se estenda demais */
+    line-height: 1.35 !important;
+    font-weight: 500;
   }
 
-  /* Responsável (Secretaria) no rodapé do Card */
   .actions-table td.col-responsavel {
-    grid-column: 1;
-    grid-row: 3;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    justify-content: flex-start;
-    line-height: 1.3;
+    font-size: 0.75rem !important;
+    max-width: 130px !important;
   }
 
-  /* UP Badge no rodapé */
-  .actions-table td[data-label="UP"] {
-    grid-column: 2;
-    grid-row: 3;
-    justify-content: center;
+  /* Badges compactos no celular */
+  .badge-up {
+    padding: 0.15rem 0.35rem !important;
+    font-size: 0.65rem !important;
   }
 
-  /* Status Badge no rodapé */
-  .actions-table td[data-label="Status"] {
-    grid-column: 3;
-    grid-row: 3;
-    justify-content: flex-end;
+  .badge-status {
+    padding: 0.2rem 0.5rem !important;
+    font-size: 0.65rem !important;
   }
 
-  /* Oculta os rótulos data-label de texto redundantes */
+  /* Oculta os pseudo-elementos before do layout de card */
   .actions-table td::before {
     display: none !important;
   }
