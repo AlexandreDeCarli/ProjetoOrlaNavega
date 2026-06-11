@@ -1318,3 +1318,164 @@ a:hover {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
+
+/* ==========================================================================
+   SKELETON LOADING AND ERROR STATES
+   ========================================================================== */
+
+/* Skeleton Pulse Animation */
+@keyframes skeleton-pulse {
+  0% {
+    background-color: oklch(0.92 0.01 240);
+  }
+  50% {
+    background-color: oklch(0.86 0.01 240);
+  }
+  100% {
+    background-color: oklch(0.92 0.01 240);
+  }
+}
+
+.skeleton {
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  border-radius: 4px;
+  animation: skeleton-pulse 1.5s infinite ease-in-out;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+/* Skeleton layouts inside KPI value */
+.skeleton-kpi {
+  display: block;
+  height: 2.25rem;
+  width: 60px;
+  border-radius: 8px;
+  animation: skeleton-pulse 1.5s infinite ease-in-out;
+}
+
+/* Skeleton layout inside progress bars while loading */
+.kpi-card.loading .kpi-progress-bar {
+  animation: skeleton-pulse 1.5s infinite ease-in-out;
+  background-color: oklch(0.92 0.01 240);
+  width: 100% !important;
+}
+
+/* Skeleton layouts inside table */
+.skeleton-text {
+  height: 1.1rem;
+}
+
+.skeleton-text.skeleton-id {
+  width: 28px;
+}
+
+.skeleton-text.skeleton-category {
+  width: 90px;
+  height: 0.9rem;
+}
+
+.skeleton-text.skeleton-action {
+  width: 90%;
+  max-width: 360px;
+}
+
+.skeleton-text.skeleton-resp {
+  width: 70px;
+}
+
+.skeleton-badge {
+  height: 1.5rem;
+  border-radius: 20px;
+}
+
+.skeleton-badge.skeleton-up {
+  width: 45px;
+  border-radius: 6px;
+}
+
+.skeleton-badge.skeleton-status {
+  width: 80px;
+}
+
+/* Disable pointer events on skeleton table rows */
+.skeleton-row {
+  pointer-events: none;
+}
+
+.skeleton-row td {
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* Smooth fade-in class for data once loaded */
+.fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Error State block styling */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: var(--bg-surface-opaque);
+  border-radius: 20px;
+  border: 1px solid oklch(0.92 0.02 20); /* Soft red tint border */
+  margin-top: 1rem;
+}
+
+.error-state-icon {
+  width: 56px;
+  height: 56px;
+  stroke: oklch(0.60 0.15 20); /* Warning/Error Red */
+  stroke-width: 2;
+  fill: none;
+  margin-bottom: 1.25rem;
+}
+
+.error-state h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.error-state p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  max-width: 45ch;
+  margin-bottom: 1.5rem;
+}
+
+/* Button style for retry action */
+.retry-btn {
+  background-color: var(--accent-costal);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.retry-btn:hover {
+  background-color: oklch(0.46 0.12 220); /* Variação escura oficial de primary hover */
+  box-shadow: var(--shadow-md);
+}
+
+.retry-btn:active {
+  transform: scale(0.97);
+}

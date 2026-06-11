@@ -149,7 +149,7 @@
       <section class="dashboard-summary" aria-label="Resumo Estatístico das Ações">
         
         <!-- KPI 1: Total -->
-        <article class="kpi-card" style="--card-accent: var(--accent-costal); --icon-bg: var(--accent-costal-light); --icon-color: var(--accent-costal);">
+        <article class="kpi-card loading" style="--card-accent: var(--accent-costal); --icon-bg: var(--accent-costal-light); --icon-color: var(--accent-costal);">
           <div class="kpi-header">
             <h3 class="kpi-title">Total de Ações</h3>
             <div class="kpi-icon-wrapper">
@@ -158,7 +158,7 @@
               </svg>
             </div>
           </div>
-          <div class="kpi-value" id="kpi-total-val">0</div>
+          <div class="kpi-value" id="kpi-total-val"><span class="skeleton-kpi"></span></div>
           <div class="kpi-progress-container">
             <div class="kpi-progress-bar" id="kpi-total-bar" style="width: 100%;"></div>
           </div>
@@ -166,7 +166,7 @@
         </article>
 
         <!-- KPI 2: Concluídas / Superadas -->
-        <article class="kpi-card" style="--card-accent: var(--status-superada); --icon-bg: var(--status-superada-bg); --icon-color: var(--status-superada);">
+        <article class="kpi-card loading" style="--card-accent: var(--status-superada); --icon-bg: var(--status-superada-bg); --icon-color: var(--status-superada);">
           <div class="kpi-header">
             <h3 class="kpi-title">Concluídas / Superadas</h3>
             <div class="kpi-icon-wrapper">
@@ -175,7 +175,7 @@
               </svg>
             </div>
           </div>
-          <div class="kpi-value" id="kpi-concluido-val">0</div>
+          <div class="kpi-value" id="kpi-concluido-val"><span class="skeleton-kpi"></span></div>
           <div class="kpi-progress-container">
             <div class="kpi-progress-bar" id="kpi-concluido-bar"></div>
           </div>
@@ -183,7 +183,7 @@
         </article>
 
         <!-- KPI 3: Em Execução -->
-        <article class="kpi-card" style="--card-accent: var(--status-execucao); --icon-bg: var(--status-execucao-bg); --icon-color: var(--status-execucao);">
+        <article class="kpi-card loading" style="--card-accent: var(--status-execucao); --icon-bg: var(--status-execucao-bg); --icon-color: var(--status-execucao);">
           <div class="kpi-header">
             <h3 class="kpi-title">Em Execução</h3>
             <div class="kpi-icon-wrapper">
@@ -192,7 +192,7 @@
               </svg>
             </div>
           </div>
-          <div class="kpi-value" id="kpi-execucao-val">0</div>
+          <div class="kpi-value" id="kpi-execucao-val"><span class="skeleton-kpi"></span></div>
           <div class="kpi-progress-container">
             <div class="kpi-progress-bar" id="kpi-execucao-bar"></div>
           </div>
@@ -200,7 +200,7 @@
         </article>
 
         <!-- KPI 4: Previstas / Sob Análise -->
-        <article class="kpi-card" style="--card-accent: var(--status-previsto); --icon-bg: var(--status-previsto-bg); --icon-color: var(--status-previsto);">
+        <article class="kpi-card loading" style="--card-accent: var(--status-previsto); --icon-bg: var(--status-previsto-bg); --icon-color: var(--status-previsto);">
           <div class="kpi-header">
             <h3 class="kpi-title">Previstas / Planejadas</h3>
             <div class="kpi-icon-wrapper">
@@ -209,7 +209,7 @@
               </svg>
             </div>
           </div>
-          <div class="kpi-value" id="kpi-previsto-val">0</div>
+          <div class="kpi-value" id="kpi-previsto-val"><span class="skeleton-kpi"></span></div>
           <div class="kpi-progress-container">
             <div class="kpi-progress-bar" id="kpi-previsto-bar"></div>
           </div>
@@ -251,7 +251,46 @@
               </tr>
             </thead>
             <tbody id="actions-table-body">
-              <!-- Preenchido dinamicamente via Javascript -->
+              <tr class="skeleton-row">
+                <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+                <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+                <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+                <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+              </tr>
+              <tr class="skeleton-row">
+                <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+                <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+                <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+                <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+              </tr>
+              <tr class="skeleton-row">
+                <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+                <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+                <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+                <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+              </tr>
+              <tr class="skeleton-row">
+                <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+                <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+                <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+                <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+              </tr>
+              <tr class="skeleton-row">
+                <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+                <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+                <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+                <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+                <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -263,6 +302,16 @@
           </svg>
           <h4>Nenhuma ação encontrada</h4>
           <p>Tente ajustar os seus filtros de busca ou remover as palavras-chave para encontrar o que procura.</p>
+        </div>
+
+        <!-- Estado de Erro no Carregamento -->
+        <div class="error-state" id="error-state" style="display: none;">
+          <svg class="error-state-icon" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+          </svg>
+          <h4>Erro ao carregar dados em tempo real</h4>
+          <p>Não foi possível carregar as ações da planilha do Google. Verifique sua conexão com a internet e tente novamente.</p>
+          <button id="retry-btn" class="retry-btn">Tentar novamente</button>
         </div>
 
       </section>
