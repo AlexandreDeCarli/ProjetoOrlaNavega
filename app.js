@@ -1,12 +1,10 @@
-import { actionsData } from './actions-data.js';
-
 // ==========================================================================
 // CONFIGURAÇÕES E ESTADO DA APLICAÇÃO
 // ==========================================================================
 
 const state = {
-  actions: [...actionsData],
-  filteredActions: [...actionsData],
+  actions: [],
+  filteredActions: [],
   filters: {
     search: '',
     up: 'all',
@@ -14,7 +12,8 @@ const state = {
     responsavel: 'all',
     status: 'all'
   },
-  sortBy: 'num-asc'
+  sortBy: 'num-asc',
+  eventsBound: false
 };
 
 const SPREADSHEET_URL = 'https://docs.google.com/spreadsheets/d/1IdSw_CzHY4zim6YWt2dqZwuqH_LO0-of/gviz/tq?tqx=out:json&tq&gid=960532358';
@@ -62,7 +61,7 @@ async function fetchActionsFromGoogleSheets() {
       };
     }).filter(action => action.n > 0); // Remove linhas de cabeçalho ou inválidas
   } catch (error) {
-    console.error("Erro ao carregar do Google Sheets. Usando dados locais como backup.", error);
+    console.error("Erro ao carregar do Google Sheets:", error);
     return null;
   }
 }
@@ -151,6 +150,8 @@ const DOM = {
   sortSelect: document.getElementById('sort-select'),
   actionsTableBody: document.getElementById('actions-table-body'),
   emptyState: document.getElementById('empty-state'),
+  errorState: document.getElementById('error-state'),
+  retryBtn: document.getElementById('retry-btn'),
   
   // Slide-Over
   detailOverlay: document.getElementById('detail-overlay'),
@@ -405,6 +406,7 @@ const renderTable = () => {
 
   list.forEach(action => {
     const tr = document.createElement('tr');
+    tr.className = 'fade-in';
     tr.dataset.id = action.n;
     
     // Obter categoria de status para estilo de badge
@@ -587,6 +589,9 @@ const closeSlideOver = () => {
 // ==========================================================================
 
 const bindEvents = () => {
+  if (state.eventsBound) return;
+  state.eventsBound = true;
+
   // Busca Global
   DOM.searchInput.addEventListener('input', (e) => {
     state.filters.search = e.target.value;
@@ -662,6 +667,11 @@ const bindEvents = () => {
 
   if (DOM.sidebarOverlay) {
     DOM.sidebarOverlay.addEventListener('click', closeMobileSidebar);
+  }
+
+  // Botão de Tentar Novamente
+  if (DOM.retryBtn) {
+    DOM.retryBtn.addEventListener('click', loadData);
   }
 };
 
@@ -751,58 +761,116 @@ const initTooltipSystem = () => {
 // INICIALIZAÇÃO DO APLICATIVO
 // ==========================================================================
 
-const init = async () => {
-  // Inicializar o sistema de tooltips
-  initTooltipSystem();
+const showTableSkeleton = () => {
+  DOM.errorState.style.display = 'none';
+  DOM.emptyState.style.display = 'none';
+  document.getElementById('actions-table').style.display = 'table';
+  DOM.explorerTitleCount.textContent = 'Buscando ações costeiras...';
+  
+  // Reset KPI cards to loading
+  document.querySelectorAll('.kpi-card').forEach(card => {
+    card.classList.add('loading');
+    const valueEl = card.querySelector('.kpi-value');
+    if (valueEl) {
+      valueEl.innerHTML = '<span class="skeleton-kpi"></span>';
+    }
+  });
 
-  // Estado visual de carregamento nos dados
-  DOM.explorerTitleCount.textContent = 'Buscando dados em tempo real do Google Sheets...';
+  // Inject skeleton rows
+  DOM.actionsTableBody.innerHTML = `
+    <tr class="skeleton-row">
+      <td class="col-num"><span class="skeleton skeleton-text skeleton-id"></span></td>
+      <td><span class="skeleton skeleton-text skeleton-category"></span></td>
+      <td class="col-action"><span class="skeleton skeleton-text skeleton-action"></span></td>
+      <td class="col-responsavel"><span class="skeleton skeleton-text skeleton-resp"></span></td>
+      <td><span class="skeleton skeleton-badge skeleton-up"></span></td>
+      <td><span class="skeleton skeleton-badge skeleton-status"></span></td>
+    </tr>
+  `.repeat(5);
+};
+
+const showErrorState = () => {
+  // Ocultar a tabela e contadores
+  document.getElementById('actions-table').style.display = 'none';
+  DOM.emptyState.style.display = 'none';
+  
+  // Exibir a caixa de erro
+  DOM.errorState.style.display = 'flex';
+  DOM.explorerTitleCount.textContent = 'Erro de conexão';
+
+  // Configurar KPIs para mostrar traço
+  document.querySelectorAll('.kpi-card').forEach(card => {
+    card.classList.remove('loading');
+    const valueEl = card.querySelector('.kpi-value');
+    if (valueEl) valueEl.textContent = '—';
+    const progressEl = card.querySelector('.kpi-progress-bar');
+    if (progressEl) progressEl.style.width = '0%';
+  });
+};
+
+const loadData = async () => {
+  showTableSkeleton();
   
   const sheetData = await fetchActionsFromGoogleSheets();
   if (sheetData && sheetData.length > 0) {
     state.actions = sheetData;
+    state.filteredActions = [...state.actions];
     console.log(`Carregado com sucesso: ${sheetData.length} ações lidas da planilha em tempo real!`);
+    
+    // Remover o estado loading dos KPIs
+    document.querySelectorAll('.kpi-card').forEach(card => card.classList.remove('loading'));
+    
+    // Ocultar o estado de erro
+    DOM.errorState.style.display = 'none';
+
+    // Limpa containers dinâmicos antes de renderizar (evita duplicação)
+    DOM.filterTopicOptions.innerHTML = `
+      <button class="filter-btn active" data-filter="topic" data-value="all">
+        <span>Todas as Categorias</span>
+        <span class="filter-count" id="count-topic-all">0</span>
+      </button>
+    `;
+    DOM.filterResponsavelOptions.innerHTML = `
+      <button class="filter-btn active" data-filter="responsavel" data-value="all">
+        <span>Todos os Órgãos</span>
+        <span class="filter-count" id="count-resp-all">0</span>
+      </button>
+    `;
+    DOM.filterStatusOptions.innerHTML = `
+      <button class="filter-btn active" data-filter="status" data-value="all">
+        <span>Todos os Status</span>
+        <span class="filter-count" id="count-status-all">0</span>
+      </button>
+    `;
+
+    initDynamicFilters();
+
+    // No mobile, colapsa os filtros mais longos por padrão para evitar scroll excessivo
+    if (window.innerWidth < 992) {
+      const topicDetails = document.getElementById('group-topic');
+      const respDetails = document.getElementById('group-responsavel');
+      const statusDetails = document.getElementById('group-status');
+      if (topicDetails) topicDetails.removeAttribute('open');
+      if (respDetails) respDetails.removeAttribute('open');
+      if (statusDetails) statusDetails.removeAttribute('open');
+    }
+
+    filterAndSortData();
   } else {
-    console.log("Falha ao ler dados remotos. Usando backup local.");
-    // Mantém o actionsData do import local como backup silencioso
+    console.error("Falha ao ler dados remotos.");
+    showErrorState();
   }
-  
-  state.filteredActions = [...state.actions];
-  
-  // Limpa containers dinâmicos antes de renderizar (evita duplicação)
-  DOM.filterTopicOptions.innerHTML = `
-    <button class="filter-btn active" data-filter="topic" data-value="all">
-      <span>Todas as Categorias</span>
-      <span class="filter-count" id="count-topic-all">0</span>
-    </button>
-  `;
-  DOM.filterResponsavelOptions.innerHTML = `
-    <button class="filter-btn active" data-filter="responsavel" data-value="all">
-      <span>Todos os Órgãos</span>
-      <span class="filter-count" id="count-resp-all">0</span>
-    </button>
-  `;
-  DOM.filterStatusOptions.innerHTML = `
-    <button class="filter-btn active" data-filter="status" data-value="all">
-      <span>Todos os Status</span>
-      <span class="filter-count" id="count-status-all">0</span>
-    </button>
-  `;
+};
 
-  initDynamicFilters();
+const init = async () => {
+  // Inicializar o sistema de tooltips
+  initTooltipSystem();
 
-  // No mobile, colapsa os filtros mais longos por padrão para evitar scroll excessivo
-  if (window.innerWidth < 992) {
-    const topicDetails = document.getElementById('group-topic');
-    const respDetails = document.getElementById('group-responsavel');
-    const statusDetails = document.getElementById('group-status');
-    if (topicDetails) topicDetails.removeAttribute('open');
-    if (respDetails) respDetails.removeAttribute('open');
-    if (statusDetails) statusDetails.removeAttribute('open');
-  }
-
+  // Garante a vinculação dos eventos principais (apenas uma vez)
   bindEvents();
-  filterAndSortData();
+
+  // Executa o carregamento de dados
+  await loadData();
 };
 
 document.addEventListener('DOMContentLoaded', init);
